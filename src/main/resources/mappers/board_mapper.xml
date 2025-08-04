@@ -11,26 +11,46 @@
         <result property="createDt" column="create_dt" />
         <result property="updateDt" column="update_dt" />
     </resultMap>
+
     <insert id="addBoard">
         insert into
-            board_tb
+        board_tb
         values
-            (0, #{title}, #{content}, #{userId}, now(), null)
+        (0, #{title}, #{content}, #{userId}, now(), null)
     </insert>
 
     <select id="getBoardByBoardId" resultMap="BoardResultMap">
         select
-            *
+        *
         from
-            board_tb
+        board_tb
         where
-            board_id = #{boardId}
+        board_id = #{boardId}
     </select>
+
     <select id="getBoardList" resultMap="BoardResultMap">
         select
-            *
+        *
         from
-            board_tb
+        board_tb
     </select>
+
+    <delete id="removeBoardByBoardId">
+        delete from
+        board_tb
+        where
+        board_id = #{boardId}
+    </delete>
+
+    <update id="updateBoardByBoardId">
+        update
+        board_tb
+        set
+        title = #{title},
+        content = #{content},
+        update_dt = now()
+        where
+        board_id = #{boardId}
+    </update>
+
 </mapper>
-   
