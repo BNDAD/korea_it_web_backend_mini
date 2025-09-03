@@ -23,6 +23,7 @@
         <result property="username" column="username"/>
         <result property="password" column="password"/>
         <result property="email" column="email"/>
+        <result property="profileImg" column="profile_img" />
         <result property="createDt" column="create_dt"/>
         <result property="updateDt" column="update_dt"/>
         <collection property="userRoles" resultMap="UserRoleResultMap"/>
@@ -31,7 +32,7 @@
     <insert id="addUser" useGeneratedKeys="true" keyProperty="userId">
         insert into
         user_tb
-        values (0, #{username}, #{password}, #{email}, now(), null)
+        values (0, #{username}, #{password}, #{email}, "https://console.firebase.google.com/project/react-board-yeop/storage/react-board-yeop.firebasestorage.app/files/~2Fprofile-img?hl=ko&amp;fb_gclid=Cj0KCQjwzt_FBhCEARIsAJGFWVnWEr9aBsJDiMFy3zyIEOS4LnKy4BX_7ff3HhJaXJ07MOTw8pMesKIaAuHhEALw_wcB", now(), null)
     </insert>
 
     <select id="getUserByUserId" resultMap="UserResultMap">
@@ -40,6 +41,7 @@
         ut.username,
         ut.password,
         ut.email,
+        ut.profile_img,
         ut.create_dt,
         ut.update_dt,
 
@@ -66,6 +68,7 @@
         ut.username,
         ut.password,
         ut.email,
+        ut.profile_img,
         ut.create_dt,
         ut.update_dt,
 
@@ -92,6 +95,7 @@
         ut.username,
         ut.password,
         ut.email,
+        ut.profile_img,
         ut.create_dt,
         ut.update_dt,
 
@@ -117,6 +121,17 @@
             user_tb
         set
             password = #{password},
+            update_dt = now()
+        where
+            user_id = #{userId}
+    </update>
+
+    <update id="updateProfileImg" >
+        update
+        from
+            user_tb
+        set
+            profile_img = #{profileImg},
             update_dt = now()
         where
             user_id = #{userId}
