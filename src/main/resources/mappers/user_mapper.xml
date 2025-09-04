@@ -32,7 +32,7 @@
     <insert id="addUser" useGeneratedKeys="true" keyProperty="userId">
         insert into
         user_tb
-        values (0, #{username}, #{password}, #{email}, "https://console.firebase.google.com/project/react-board-yeop/storage/react-board-yeop.firebasestorage.app/files/~2Fprofile-img?hl=ko&amp;fb_gclid=Cj0KCQjwzt_FBhCEARIsAJGFWVnWEr9aBsJDiMFy3zyIEOS4LnKy4BX_7ff3HhJaXJ07MOTw8pMesKIaAuHhEALw_wcB", now(), null)
+        values (0, #{username}, #{password}, #{email}, "https://firebasestorage.googleapis.com/v0/b/react-board-yeop.firebasestorage.app/o/profile-img%2Fgenerated-image.png?alt=media&amp;token=845cb92f-4402-4d63-9a44-58b358656448", now(), null)
     </insert>
 
     <select id="getUserByUserId" resultMap="UserResultMap">
@@ -66,6 +66,7 @@
         select
         ut.user_id,
         ut.username,
+        ut.password,
         ut.password,
         ut.email,
         ut.profile_img,
@@ -128,7 +129,6 @@
 
     <update id="updateProfileImg" >
         update
-        from
             user_tb
         set
             profile_img = #{profileImg},
